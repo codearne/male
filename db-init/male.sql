@@ -34,7 +34,7 @@ SET row_security = off;
 -- Name: f_klubiparimad(integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
-CREATE FUNCTION public.f_klubiparimad(klubi_id integer) RETURNS TABLE(mangija text, elo integer)
+CREATE OR REPLACE FUNCTION public.f_klubiparimad(klubi_id integer) RETURNS TABLE(mangija text, elo integer)
     LANGUAGE plpgsql
     AS $$
     BEGIN
@@ -1506,4 +1506,3 @@ REFRESH MATERIALIZED VIEW public.mv_partiide_arv_valgetega;
 --
 
 \unrestrict xB13m2yKqRTRvbLOvtfBckUn0zBc2uTGHxdhiIC6mvo4Z6YSSvdh9Q69QsJtAc5
-

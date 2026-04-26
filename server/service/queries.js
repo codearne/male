@@ -259,6 +259,11 @@ const SELECT_CLUB_BY_ID = `
     GROUP BY k.nimi, a.nimi
 `;
 
+const SELECT_TOP_PLAYERS_IN_CLUB = `
+    SELECT mangija, elo
+    FROM f_klubiparimad($1)
+`;
+
 const SELECT_TOP_CLUBS = `
     SELECT k.nimi, ROUND(AVG(i.ranking), 1) as average_rating
     FROM klubid k
@@ -313,6 +318,7 @@ module.exports = {
     DELETE_TOURNAMENT,
     SELECT_ALL_CLUBS,
     SELECT_CLUB_BY_ID,
+    SELECT_TOP_PLAYERS_IN_CLUB,
     SELECT_TOP_CLUBS,
     getAddOrUpdateClubQuery,
     DELETE_CLUB,
