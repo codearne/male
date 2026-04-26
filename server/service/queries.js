@@ -251,12 +251,17 @@ const SELECT_ALL_CLUBS = `
 `;
 
 const SELECT_CLUB_BY_ID = `
-    SELECT k.nimi, a.nimi AS asukoht, f_klubisuurus($1) AS members, ROUND(AVG(i.ranking), 1) AS average_rating
+    SELECT k.nimi, a.nimi AS asukoht, COUNT(i.id) AS members, ROUND(AVG(i.ranking), 1) AS average_rating
     FROM klubid k
     LEFT JOIN isikud i ON k.id = i.klubis
     LEFT JOIN asulad a ON k.asula = a.id
     WHERE k.id = $1
     GROUP BY k.nimi, a.nimi
+`;
+
+const SELECT_TOP_PLAYERS_IN_CLUB = `
+    SELECT mangija, elo
+    FROM f_klubiparimad($1)
 `;
 
 const SELECT_TOP_CLUBS = `
@@ -313,6 +318,7 @@ module.exports = {
     DELETE_TOURNAMENT,
     SELECT_ALL_CLUBS,
     SELECT_CLUB_BY_ID,
+    SELECT_TOP_PLAYERS_IN_CLUB,
     SELECT_TOP_CLUBS,
     getAddOrUpdateClubQuery,
     DELETE_CLUB,
